@@ -30,6 +30,7 @@ module.exports = {
     // General rules
     "import/extensions": 0,
     "react/function-component-definition": 0,
+    "import/prefer-default-export": 0,
     // JavaScript rules
     "prefer-const": "warn",
     "no-var": "warn",

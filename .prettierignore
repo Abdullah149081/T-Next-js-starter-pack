@@ -7,3 +7,6 @@ next-env.d.ts
 next.config.ts
 yarn.lock
 pnpm-lock.yaml
+.eslintrc.js
+.prettierrc
+.stylelintrc.json
