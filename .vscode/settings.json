@@ -1,0 +1,68 @@
+{
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.sortImports": "explicit",
+    "source.fixAll.eslint": "explicit",
+    "source.fixAll.tslint": "explicit"
+  },
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact"
+  ],
+
+  // Configure todo-tree to exclude node_modules, dist, and compiled.
+  "todo-tree.filtering.excludeGlobs": [
+    "**/node_modules",
+    "**/dist",
+    "**/compiled"
+  ],
+  // Match TODO-APP in addition to other TODOs.
+  "todo-tree.general.tags": [
+    "BUG",
+    "HACK",
+    "FIXME",
+    "TODO",
+    "NOTE",
+    "REVIEW",
+    "WARN"
+  ],
+  "todo-tree.tree.autoRefresh": false,
+  "todo-tree.highlights.useColourScheme": true,
+  "todo-tree.highlights.defaultHighlight": {
+    "type": "line",
+    "gutterIcon": true
+  },
+  "todo-tree.highlights.customHighlight": {
+    "HACK": {
+      "icon": "shield-x",
+      "background": "#001414",
+      "foreground": "#fff",
+      "iconColour": "#FF0000"
+    },
+    "FIXME": {
+      "icon": "tools",
+      "background": "#FF0000",
+      "foreground": "#fff",
+      "iconColour": "#FF0000"
+    },
+    "NOTE": {
+      "icon": "note",
+      "background": "#FFA500",
+      "foreground": "#000000",
+      "iconColour": "#FFA500"
+    },
+    "WARN": {
+      "icon": "alert",
+      "background": "#ffcc00",
+      "foreground": "#000000",
+      "iconColour": "#FFA500"
+    },
+    "REVIEW": {
+      "icon": "code-review",
+      "iconColour": "#ADD8E6"
+    }
+  }
+}
