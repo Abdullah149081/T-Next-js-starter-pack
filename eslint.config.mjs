@@ -32,7 +32,7 @@ export default [
       "eslint.config.mjs",
       "next.config.js",
       "postcss.config.mjs",
-      "tailwind.config.ts",
+   
     ],
   },
   ...compat.extends(
@@ -43,7 +43,7 @@ export default [
     "next/core-web-vitals",
     "next/typescript",
     "plugin:prettier/recommended",
-    "plugin:@next/next/recommended",
+    "plugin:@next/next/recommended"
   ),
   {
     plugins: {
