@@ -1,6 +1,5 @@
 {
-  "bracketSpacing": true,
-  "endOfLine": "lf",
+  "endOfLine": "auto",
   "printWidth": 80,
   "semi": true,
   "tabWidth": 2,
