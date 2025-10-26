@@ -14,6 +14,11 @@ pnpm dev
 bun dev
 ```
 
+```
+pnpm add -D eslint @eslint/js @eslint/eslintrc eslint-config-next eslint-config-prettier eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-prettier eslint-plugin-react eslint-plugin-react-hooks prettier prettier-plugin-tailwindcss
+
+```
+
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
