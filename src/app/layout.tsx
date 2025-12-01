@@ -1,6 +1,5 @@
-/* eslint-disable camelcase */
-import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import type { Metadata } from "next";
 import "./globals.css";
 
 const geistSans = Geist({

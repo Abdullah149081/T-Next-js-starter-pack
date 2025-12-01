@@ -1,54 +1,24 @@
-import { FlatCompat } from "@eslint/eslintrc";
-import js from "@eslint/js";
-import path from "node:path";
-import { fileURLToPath } from "node:url";
+import { defineConfig, globalIgnores } from "eslint/config";
+import nextVitals from "eslint-config-next/core-web-vitals";
+import nextTs from "eslint-config-next/typescript";
+import prettierConfig from "eslint-config-prettier/flat";
+import prettierPlugin from "eslint-plugin-prettier";
+import nextPlugin from "@next/eslint-plugin-next";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-const compat = new FlatCompat({
-  baseDirectory: __dirname,
-  recommendedConfig: js.configs.recommended,
-  allConfig: js.configs.all,
-});
-
-const eslintConfig = [
-  // Ignore patterns
+const eslintConfig = defineConfig([
+  ...nextVitals,
+  ...nextTs,
+  prettierConfig,
   {
-    ignores: [
-      "**/.next",
-      "**/.cache",
-      "**/node_modules",
-      "**/dist",
-      "**/build",
-      "**/.env*",
-      "**/next-env.d.ts",
-      "**/next.config.*",
-      "**/postcss.config.*",
-      "**/tailwind.config.*",
-      "eslint.config.mjs",
-      "**/package-lock.json",
-      "**/pnpm-lock.yaml",
-      "**/yarn.lock",
-      "**/*.min.js",
-      "**/public/**",
-    ],
-  },
-
-  // Core configuration with Next.js, TypeScript, and Core Web Vitals
-  ...compat.config({
-    extends: [
-      "eslint:recommended",
-      "next/core-web-vitals", // Core Web Vitals rules
-      "next/typescript", // TypeScript-specific rules
-      "prettier", // Prettier integration
-      "plugin:prettier/recommended",
-    ],
-
+    plugins: {
+      prettier: prettierPlugin,
+      next: nextPlugin,
+    },
     rules: {
+      ...nextPlugin.configs.recommended.rules,
       // TypeScript-specific rules
       "@typescript-eslint/no-unused-vars": [
-        "warn",
+        "error",
         {
           argsIgnorePattern: "^_",
           varsIgnorePattern: "^_",
@@ -66,8 +36,8 @@ const eslintConfig = [
       ],
 
       // React/Next.js specific rules
-      "react/react-in-jsx-scope": "off", // Not needed in Next.js
-      "react/prop-types": "off", // TypeScript handles this
+      "react/react-in-jsx-scope": "off",
+      "react/prop-types": "off",
       "react/jsx-key": "error",
       "react/jsx-no-duplicate-props": "error",
       "react/jsx-no-undef": "error",
@@ -83,8 +53,8 @@ const eslintConfig = [
 
       // General JavaScript/TypeScript rules
       "prefer-const": "warn",
-      "no-var": "warn",
-      "no-unused-vars": "off", // Handled by TypeScript rule
+      "no-var": "error",
+      "no-unused-vars": "off",
       "no-console": "warn",
       "no-debugger": "error",
       "object-shorthand": "warn",
@@ -113,29 +83,26 @@ const eslintConfig = [
           },
         },
       ],
-      "import/no-duplicates": "warn",
-      "import/no-unresolved": "off", // TypeScript handles this
+      "import/no-duplicates": "error",
+      "import/no-unresolved": "off",
 
       // Prettier rules
       "prettier/prettier": [
         "warn",
         {
-          // Prettier config options
           endOfLine: "auto",
           trailingComma: "all",
           tabWidth: 2,
           semi: true,
           printWidth: 80,
-
-          // ESLint specific options
-          usePrettierrc: true, // Use .prettierrc file (default: true)
+          usePrettierrc: true,
           fileInfoOptions: {
             withNodeModules: false,
           },
         },
       ],
 
-      // Accessibility rules (included in core-web-vitals)
+      // Accessibility rules
       "jsx-a11y/alt-text": "warn",
       "jsx-a11y/anchor-has-content": "warn",
       "jsx-a11y/anchor-is-valid": "warn",
@@ -158,7 +125,6 @@ const eslintConfig = [
         },
       ],
     },
-
     settings: {
       react: {
         version: "detect",
@@ -170,28 +136,14 @@ const eslintConfig = [
         },
       },
     },
-
-    env: {
-      browser: true,
-      es2021: true,
-      node: true,
-    },
-
-    parserOptions: {
-      ecmaVersion: "latest",
-      sourceType: "module",
-      ecmaFeatures: {
-        jsx: true,
-      },
-    },
-  }),
+  },
 
   // Additional configuration for test files
   {
     files: ["**/*.test.{js,jsx,ts,tsx}", "**/*.spec.{js,jsx,ts,tsx}"],
     rules: {
-      "no-console": "off", // Allow console in tests
-      "@typescript-eslint/no-explicit-any": "off", // More lenient in tests
+      "no-console": "off",
+      "@typescript-eslint/no-explicit-any": "off",
     },
   },
 
@@ -203,6 +155,29 @@ const eslintConfig = [
       "import/no-anonymous-default-export": "off",
     },
   },
-];
+
+  // Override default ignores of eslint-config-next
+  globalIgnores([
+    ".next/**",
+    "out/**",
+    "build/**",
+    "next-env.d.ts",
+    "**/.next",
+    "**/.cache",
+    "**/node_modules",
+    "**/dist",
+    "**/build",
+    "**/.env*",
+    "**/next-env.d.ts",
+    "**/next.config.*",
+    "**/postcss.config.*",
+    "eslint.config.mjs",
+    "**/package-lock.json",
+    "**/pnpm-lock.yaml",
+    "**/yarn.lock",
+    "**/*.min.js",
+    "**/public/**",
+  ]),
+]);
 
 export default eslintConfig;
